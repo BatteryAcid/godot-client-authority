@@ -1,3 +1,9 @@
+# Client Authority
+
+This version gives client authority over the full player object, not limited to just input.  
+
+- See tutorial: https://youtu.be/56PowF5fLAk  
+
 
 # Basic Multiplayer Version
 
