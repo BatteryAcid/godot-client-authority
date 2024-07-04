@@ -12,7 +12,7 @@ func _on_body_entered(body):
 		_multiplayer_dead(body)
 
 func _multiplayer_dead(body):
-	if multiplayer.is_server() && body.alive:
+	if body.alive:
 		body.mark_dead()
 
 func _on_timer_timeout():

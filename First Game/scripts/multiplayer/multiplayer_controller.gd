@@ -16,9 +16,13 @@ var alive = true
 @export var player_id := 1:
 	set(id):
 		player_id = id
-		player_input.set_multiplayer_authority(id)
+		#player_input.set_multiplayer_authority(id)
 
 func _ready():
+	await get_tree().process_frame
+	
+	$".".set_multiplayer_authority(str(name).to_int())
+	
 	if multiplayer.get_unique_id() == player_id:
 		$Camera2D.make_current()
 	else:
@@ -62,13 +66,14 @@ func _apply_movement_from_input(delta):
 	move_and_slide()
 
 func _physics_process(delta):
-	if multiplayer.is_server():
+	if is_multiplayer_authority():#multiplayer.is_server():
 		if not alive && is_on_floor():
 			_set_alive()
 		
 		_is_on_floor = is_on_floor()
 		_apply_movement_from_input(delta)
-		
+
+func _process(delta):
 	if not multiplayer.is_server() || MultiplayerManager.host_mode_enabled:
 		_apply_animations(delta)
 
