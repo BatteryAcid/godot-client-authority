@@ -18,12 +18,15 @@ var alive = true
 		player_id = id
 		#player_input.set_multiplayer_authority(id)
 
-func _ready():
-	await get_tree().process_frame
-	
+func _enter_tree():
 	$".".set_multiplayer_authority(str(name).to_int())
+
+func _ready():
+	#await get_tree().process_frame
 	
-	if multiplayer.get_unique_id() == player_id:
+	#$".".set_multiplayer_authority(str(name).to_int())
+	
+	if multiplayer.get_unique_id() == str(name).to_int(): #player_id:
 		$Camera2D.make_current()
 	else:
 		$Camera2D.enabled = false
